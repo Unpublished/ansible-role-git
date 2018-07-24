@@ -23,6 +23,10 @@ This variable, a well as `git_packages`, will be used to install git via a parti
     git_packages:
       - git
 
+To install the latest git version in Ubuntu you can set `git_ensure_latest_version` to true. This will install git from the official git PPA 
+
+    git_ensure_latest_version: true
+
 The specific Git packages that will be installed. By default, only `git` is installed, but you could add additional git-related packages like `git-svn` if desired.
 
     git_install_from_source: false
