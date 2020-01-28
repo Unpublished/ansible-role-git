@@ -1,0 +1,35 @@
+---
+- name: Ensure dirmngr and gpg are installed
+  package:
+    name:
+      - dirmngr
+      - gpg
+    state: present
+  when: ansible_os_family == 'Debian'
+
+- name: Add git apt repository key.
+  apt_key:
+    id: E1DD270288B4E6030699E45FA1715D88E1DF1F24
+    keyserver: keyserver.ubuntu.com
+    state: present
+  when: ansible_distribution == 'Debian'
+
+- name: Seting git_codename to bionic
+  set_fact:
+    git_codename: "bionic"
+  when:
+    - ansible_distribution == 'Debian'
+    - ansible_distribution_major_version == "10"
+
+- name: Seting git_codename to xenial
+  set_fact:
+    git_codename: "xenial"
+  when:
+    - ansible_distribution == 'Debian'
+    - ansible_distribution_major_version == "9"
+
+- name: Add git ppa to get latest version (Ubuntu)
+  apt_repository:
+    codename: "{{ git_codename }}"
+    repo: 'ppa:git-core/ppa'
+  when: ansible_os_family == 'Debian'

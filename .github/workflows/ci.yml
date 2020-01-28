@@ -54,6 +54,8 @@ jobs:
             playbook: source-install.yml
           - distro: ubuntu1804
             playbook: playbook-latest.yml
+          - distro: debian9
+            playbook: playbook-latest.yml
           - distro: debian10
             playbook: playbook-latest.yml
 
